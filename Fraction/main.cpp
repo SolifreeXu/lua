@@ -2,10 +2,10 @@
 #include <random>
 #include <ctime>
 
-Fraction generate()
+Fraction generate(long upperLimit)
 {
 	static std::default_random_engine random(time(NULL));
-	static std::uniform_int_distribution<int> distribution(0, 10000);
+	static std::uniform_int_distribution<long> distribution(0, upperLimit);
 	long molecule = distribution(random);
 	long denominator = distribution(random) + 1;
 	if (distribution(random) % 2)
@@ -17,7 +17,7 @@ using std::cout;
 
 int main()
 {
-	Fraction left = generate(), right = generate(), buff, result;
+	Fraction left = generate(10000), right = generate(10000), buff, result;
 	switch (rand() % 4)
 	{
 	case 0:
@@ -59,8 +59,8 @@ int main()
 	}
 	std::cin >> result;
 	if (result == buff)
-		cout << "�ش���ȷ\n";
+		cout << "»Ø´ðÕýÈ·\n";
 	else
-		cout << "�ش����\n";
+		cout << "»Ø´ð´íÎó\n";
 	return 0;
 }
