@@ -17,7 +17,7 @@ public:
 	Fraction operator/(Fraction fraction);
 	bool operator==(const Fraction &fraction);
 	Fraction& operator=(Fraction &&fraction);
-	operator float(){ return (float)m_iMolecule / m_iDenominator; }
+	operator double(){ return (double)m_iMolecule / m_iDenominator; }
 	unsigned maxCommonDivisor(unsigned a, unsigned b);
 	unsigned minCommonMultiple(unsigned a, unsigned b);
 };
