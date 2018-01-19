@@ -1,4 +1,5 @@
-#include "Fraction.h"
+﻿#include "Fraction.h"
+
 #include <random>
 #include <ctime>
 
@@ -18,7 +19,8 @@ using std::cout;
 int main()
 {
 	Fraction left = generate(10000), right = generate(10000), buff, result;
-	switch (rand() % 4)
+	std::random_device builder;
+	switch (builder() % 4)
 	{
 	case 0:
 		buff = left + right;
@@ -59,8 +61,8 @@ int main()
 	}
 	std::cin >> result;
 	if (result == buff)
-		cout << "»Ø´ðÕýÈ·\n";
+		cout << "正确！\n";
 	else
-		cout << "»Ø´ð´íÎó\n";
+		cout << "错误！\n";
 	return 0;
 }
