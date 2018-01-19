@@ -1,30 +1,35 @@
 #include <iostream>
-#include <windows.h>
-#include <time.h>
-
-using namespace std;
 
 class Date
 {
-private:
 	int year;
 	unsigned month;
 	unsigned day;
+
+	friend std::istream &operator >> (std::istream&, Date&);
+	friend std::ostream &operator << (std::ostream&, Date&);
 public:
 	Date();
 	Date(int, unsigned, unsigned);
-	Date operator = (const Date&);
+	Date& operator = (const Date&);
 	bool operator == (const Date&);
 	bool operator > (const Date&);
 	bool operator < (const Date&);
 	bool operator >= (const Date&);
 	bool operator <= (const Date&);
-	friend istream &operator >> (istream&, Date&);
-	friend ostream &operator << (ostream&, Date&);
-	int get_year();
-	unsigned get_month();
-	unsigned get_day();
-	void set_year(const int year);
-	bool set_month(const unsigned month);
-	bool set_day(const unsigned day);
+	int getYear()
+	{
+		return year;
+	}
+	unsigned getMonth()
+	{
+		return month;
+	}
+	unsigned getDay()
+	{
+		return day;
+	}
+	void setYear(const int year);
+	bool setMonth(const unsigned month);
+	bool setDay(const unsigned day);
 };
