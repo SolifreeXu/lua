@@ -103,5 +103,5 @@ unsigned Fraction::maxCommonDivisor(unsigned first, unsigned second)
 
 unsigned Fraction::minCommonMultiple(unsigned first, unsigned second)
 {
-	return first*second / maxCommonDivisor(first, second);
+	return first / maxCommonDivisor(first, second)*second;
 }
