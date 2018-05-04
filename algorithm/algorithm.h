@@ -2,6 +2,18 @@
 
 namespace forever
 {
+	/*
+		C++14中的std::move实现例子
+		函数返回值类型推导
+		标准库的别名模板std:remove_reference_t
+	*/
+	template<typename T>
+	decltype(auto) move(T&& param)
+	{
+		using ReturnType = std::remove_reference_t<T>&&;
+		return static_cast<ReturnType>(param);
+	}
+	
 	//template <class T>
 	//inline void swap(T &x, T &y)
 	//{
