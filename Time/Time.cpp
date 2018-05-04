@@ -1,6 +1,19 @@
 #include "Time.h"
 
-#include <iostream>
+std::istream& operator>>(std::istream &is, Time &time)
+{
+	char delimiter;
+	is >> time.hours >> delimiter >> time.minutes >> delimiter >> time.seconds;
+	time.totalSeconds = time.hours * 3600 + time.minutes * 60 + time.seconds;
+	return is;
+}
+
+std::ostream& operator<<(std::ostream &os, const Time &time)
+{
+	os << time.hours << ':' << time.minutes << ':' << time.seconds;
+	return os;
+}
+
 #include <ctime>
 
 Time::Time()
@@ -72,37 +85,37 @@ bool Time::setSeconds(const int &seconds)
 	return true;
 }
 
-Time Time::operator+(const Time &time)
+Time operator+(const Time &left, const Time &right)
 {
-	return Time(this->getTime() + time.getTime());
+	return Time(left.getTime() + right.getTime());
 }
 
-Time Time::operator-(const Time &time)
+Time operator-(const Time &left, const Time &right)
 {
-	return Time(this->getTime() - time.getTime());
+	return Time(left.getTime() - right.getTime());
 }
 
-bool Time::operator>(const Time &time)
+bool operator>(const Time &left, const Time &right)
 {
-	return this->getTime() > time.getTime();
+	return left.getTime() > right.getTime();
 }
 
-bool Time::operator>=(const Time &time)
+bool operator<(const Time &left, const Time &right)
 {
-	return this->getTime() >= time.getTime();
+	return left.getTime() < right.getTime();
 }
 
-bool Time::operator<(const Time &time)
+bool operator==(const Time &left, const Time &right)
 {
-	return this->getTime() < time.getTime();
+	return left.getTime() == right.getTime();
 }
 
-bool Time::operator<=(const Time &time)
+bool operator>=(const Time &left, const Time &right)
 {
-	return this->getTime() <= time.getTime();
+	return left.getTime() >= right.getTime();
 }
 
-bool Time::operator==(const Time &time)
+bool operator<=(const Time &left, const Time &right)
 {
-	return this->getTime() == time.getTime();
+	return left.getTime() <= right.getTime();
 }

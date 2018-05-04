@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 class Time
 {
 private:
@@ -7,6 +9,9 @@ private:
 	long long hours;
 	int minutes;
 	int seconds;
+
+	friend std::istream& operator>>(std::istream&, Time&);
+	friend std::ostream& operator<<(std::ostream&, const Time&);
 public:
 	Time();
 	Time(const long long &seconds);
@@ -31,11 +36,11 @@ public:
 	{
 		return seconds;
 	}
-	Time operator+(const Time &time);
-	Time operator-(const Time &time);
-	bool operator>(const Time &time);
-	bool operator>=(const Time &time);
-	bool operator<(const Time &time);
-	bool operator<=(const Time &time);
-	bool operator==(const Time &time);
+	friend Time operator+(const Time &left, const Time &right);
+	friend Time operator-(const Time &left, const Time &right);
+	friend bool operator>(const Time &left, const Time &right);
+	friend bool operator<(const Time &left, const Time &right);
+	friend bool operator==(const Time &left, const Time &right);
+	friend bool operator>=(const Time &left, const Time &right);
+	friend bool operator<=(const Time &left, const Time &right);
 };
