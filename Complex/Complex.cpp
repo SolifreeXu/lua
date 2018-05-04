@@ -1,53 +1,53 @@
 #include "Complex.h"
 
-Complex Complex::operator+(const Complex &other) const
+Complex operator+(const Complex &left, const Complex &right)
 {
-	return Complex(this->realPart + other.realPart, this->imaginaryPart + other.imaginaryPart);
+	return Complex(left.realPart + right.realPart, left.imaginaryPart + right.imaginaryPart);
 }
 
-Complex Complex::operator-(const Complex &other) const
+Complex operator-(const Complex &left, const Complex &right)
 {
-	return Complex(this->realPart - other.realPart, this->imaginaryPart - other.imaginaryPart);
+	return Complex(left.realPart - right.realPart, left.imaginaryPart - right.imaginaryPart);
 }
 
-Complex& Complex::operator+=(const Complex &other)
+Complex operator*(const Complex &left, const Complex &right)
 {
-	this->realPart += other.realPart;
-	this->imaginaryPart += other.imaginaryPart;
-	return *this;
+	return Complex(left.realPart*right.realPart - left.imaginaryPart*right.imaginaryPart, \
+		left.realPart*right.imaginaryPart + left.imaginaryPart*right.realPart);
 }
 
-Complex& Complex::operator-=(const Complex &other)
+Complex operator/(const Complex &left, const Complex &right)
 {
-	this->realPart -= other.realPart;
-	this->imaginaryPart -= other.imaginaryPart;
-	return *this;
+	double denominator = right.realPart*right.realPart + right.imaginaryPart*right.imaginaryPart;
+	return Complex((left.realPart*right.realPart + left.imaginaryPart*right.imaginaryPart) / denominator, \
+		(-left.realPart*right.imaginaryPart + left.imaginaryPart*right.realPart) / denominator);
 }
 
-Complex Complex::operator*(const Complex &other) const
+Complex& operator+=(Complex &left, const Complex &right)
 {
-	return Complex(this->realPart*other.realPart - this->imaginaryPart*other.imaginaryPart, \
-		this->realPart*other.imaginaryPart + this->imaginaryPart*other.realPart);
+	left.realPart += right.realPart;
+	left.imaginaryPart += right.imaginaryPart;
+	return left;
 }
 
-Complex Complex::operator/(const Complex &other) const
+Complex& operator-=(Complex &left, const Complex &right)
 {
-	double denominator = other.realPart*other.realPart + other.imaginaryPart*other.imaginaryPart;
-	return Complex((this->realPart*other.realPart + this->imaginaryPart*other.imaginaryPart) / denominator, \
-		(-this->realPart*other.imaginaryPart + this->imaginaryPart*other.realPart) / denominator);
+	left.realPart -= right.realPart;
+	left.imaginaryPart -= right.imaginaryPart;
+	return left;
 }
 
-Complex& Complex::operator*=(const Complex &other)
+Complex& operator*=(Complex &left, const Complex &right)
 {
-	return *this = Complex(this->realPart*other.realPart - this->imaginaryPart*other.imaginaryPart, \
-		this->realPart*other.imaginaryPart + this->imaginaryPart*other.realPart);
+	return left = Complex(left.realPart*right.realPart - left.imaginaryPart*right.imaginaryPart, \
+		left.realPart*right.imaginaryPart + left.imaginaryPart*right.realPart);
 }
 
-Complex& Complex::operator/=(const Complex &other)
+Complex& operator/=(Complex &left, const Complex &right)
 {
-	double denominator = other.realPart*other.realPart + other.imaginaryPart*other.imaginaryPart;
-	return *this = Complex((this->realPart*other.realPart + this->imaginaryPart*other.imaginaryPart) / denominator, \
-		(-this->realPart*other.imaginaryPart + this->imaginaryPart*other.realPart) / denominator);
+	double denominator = right.realPart*right.realPart + right.imaginaryPart*right.imaginaryPart;
+	return left = Complex((left.realPart*right.realPart + left.imaginaryPart*right.imaginaryPart) / denominator, \
+		(-left.realPart*right.imaginaryPart + left.imaginaryPart*right.realPart) / denominator);
 }
 
 std::ostream & operator <<(std::ostream &output, const Complex &complex)
@@ -63,5 +63,6 @@ std::ostream & operator <<(std::ostream &output, const Complex &complex)
 
 std::istream & operator >>(std::istream &input, Complex &complex)
 {
-	return input >> complex.realPart >> complex.imaginaryPart;
+	char imaginaryUnit;
+	return input >> complex.realPart >> complex.imaginaryPart >> imaginaryUnit;
 }
