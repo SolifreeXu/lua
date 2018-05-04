@@ -1,24 +1,25 @@
 #include "Date.h"
 
-#include <time.h>
-
-std::istream &operator >> (std::istream &input, Date &object)
+std::istream& operator>> (std::istream &input, Date &object)
 {
-	input >> object.year >> object.month >> object.day;
+	char delimiter;
+	input >> object.year >> delimiter >> object.month >> delimiter >> object.day;
 	return input;
 }
 
-std::ostream &operator << (std::ostream &output, Date &object)
+std::ostream& operator<< (std::ostream &output, const Date &object)
 {
-	output << object.year << '-';
+	output << object.year << '/';
 	if (object.month < 10)
 		output << '0';
-	output << object.month << '-';
+	output << object.month << '/';
 	if (object.day < 10)
 		output << '0';
-	output << object.day << ' ';
+	output << object.day;
 	return output;
 }
+
+#include <time.h>
 
 Date::Date()
 {
@@ -44,53 +45,53 @@ Date& Date::operator = (const Date &other)
 	return *this;
 }
 
-bool Date::operator==(const Date &other)
+bool operator==(const Date &left, const Date &right)
 {
-	if (year == other.year && month == other.month && day == other.day)
+	if (left.year == right.year && left.month == right.month && left.day == right.day)
 		return true;
 	return false;
 }
 
-bool Date::operator>(const Date &other)
+bool operator>(const Date &left, const Date &right)
 {
-	if (this->year > other.year)
+	if (left.year > right.year)
 		return true;
-	if (this->year == other.year && this->month > other.month)
+	if (left.year == right.year && left.month > right.month)
 		return true;
-	if (this->year == other.year && this->month == other.month && this->day > other.day)
+	if (left.year == right.year && left.month == right.month && left.day > right.day)
 		return true;
 	return false;
 }
 
-bool Date::operator<(const Date &other)
+bool operator<(const Date &left, const Date &right)
 {
-	if (year < other.year)
+	if (left.year < right.year)
 		return true;
-	if (year == other.year && month < other.month)
+	if (left.year == right.year && left.month < right.month)
 		return true;
-	if (year == other.year && month == other.month && day < other.day)
+	if (left.year == right.year && left.month == right.month && left.day < right.day)
 		return true;
 	return false;
 }
 
-bool Date::operator>=(const Date &other)
+bool operator>=(const Date &left, const Date &right)
 {
-	if (this->year > other.year)
+	if (left.year > right.year)
 		return true;
-	else if (this->year == other.year && this->month > other.month)
+	else if (left.year == right.year && left.month > right.month)
 		return true;
-	else if (this->year == other.year && this->month == other.month && this->day >= other.day)
+	else if (left.year == right.year && left.month == right.month && left.day >= right.day)
 		return true;
 	return false;
 }
 
-bool Date::operator<=(const Date &other)
+bool operator<=(const Date &left, const Date &right)
 {
-	if (year < other.year)
+	if (left.year < right.year)
 		return true;
-	else if (year == other.year && month < other.month)
+	else if (left.year == right.year && left.month < right.month)
 		return true;
-	else if (year == other.year && month == other.month && day <= other.day)
+	else if (left.year == right.year && left.month == right.month && left.day <= right.day)
 		return true;
 	return false;
 }

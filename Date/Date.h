@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 
 class Date
@@ -6,17 +8,17 @@ class Date
 	unsigned month;
 	unsigned day;
 
-	friend std::istream &operator >> (std::istream&, Date&);
-	friend std::ostream &operator << (std::ostream&, Date&);
+	friend std::istream& operator>> (std::istream&, Date&);
+	friend std::ostream& operator<< (std::ostream&, const Date&);
 public:
 	Date();
 	Date(int, unsigned, unsigned);
 	Date& operator = (const Date&);
-	bool operator == (const Date&);
-	bool operator > (const Date&);
-	bool operator < (const Date&);
-	bool operator >= (const Date&);
-	bool operator <= (const Date&);
+	friend bool operator == (const Date &left, const Date &right);
+	friend bool operator > (const Date &left, const Date &right);
+	friend bool operator < (const Date &left, const Date &right);
+	friend bool operator >= (const Date &left, const Date &right);
+	friend bool operator <= (const Date &left, const Date &right);
 	int getYear()
 	{
 		return year;
