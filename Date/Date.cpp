@@ -110,9 +110,12 @@ bool Date::setMonth(const unsigned month)
 		this->month = month;
 		if (month == 2)
 		{
-			if (year % 4 != 0 && day > 29)
-				day = 29;
-			if (year % 4 == 0 && day > 28)
+			if (isLeapYear())
+			{
+				if (day > 29)
+					day = 29;
+			}
+			else if (day > 28)
 				day = 28;
 		}
 		else if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30)
@@ -126,12 +129,12 @@ bool Date::setDay(const unsigned day)
 {
 	if (month == 2 && day <= 29)
 	{
-		if (year % 4 != 0)
+		if (isLeapYear())
 		{
 			this->day = day;
 			return true;
 		}
-		else if (year % 4 == 0 && day<29)
+		else if (day < 29)
 		{
 			this->day = day;
 			return true;

@@ -6,8 +6,8 @@ int main()
 	Date date;
 	std::cout << date << std::endl;
 	date.setYear(-100);
-	date.setMonth(0);
-	date.setDay(-1);
+	date.setMonth(2);
+	date.setDay(29);
 	std::cout << date << std::endl;
 	return 0;
 }

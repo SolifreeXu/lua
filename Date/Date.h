@@ -34,4 +34,8 @@ public:
 	void setYear(const int year);
 	bool setMonth(const unsigned month);
 	bool setDay(const unsigned day);
+	bool isLeapYear()
+	{
+		return year % 400 == 0 || year % 4 == 0 && year % 100 != 0;
+	}
 };
