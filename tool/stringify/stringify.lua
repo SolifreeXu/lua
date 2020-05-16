@@ -1,4 +1,4 @@
-local function stringify(root)
+return function stringify(root)
 	local explicit = function(value)
 		local type = type(value)
 		if type == "string" then
