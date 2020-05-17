@@ -1,14 +1,16 @@
-return function stringify(root)
+return function(root)
 	local explicit = function(value)
 		local type = type(value)
 		if type == "string" then
 			return '"' .. value .. '"'
-		elseif type == "boolean" then
-			return tostring(value)
 		elseif type == "number" then
 			return value
+		elseif type == "boolean" then
+			return tostring(value)
+		elseif type == "nil" then
+			return '"' .. tostring(value) .. '"'
 		end
-		return '"' .. tostring(value) .. '"'
+		return "\"\\\"" .. tostring(value) .. "\"\\\""
 	end
 
 	if type(root) ~= "table" then
@@ -16,8 +18,8 @@ return function stringify(root)
 	end
 
 	local image = {}
-	local mapper = {}
 	local counter = 0
+	local mapper = {}
 	local function traverse(root, indent, prefix)
 		if mapper[root] then
 			counter = counter + 1
