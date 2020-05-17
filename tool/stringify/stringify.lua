@@ -1,18 +1,18 @@
-return function(root)
-	local explicit = function(value)
-		local type = type(value)
-		if type == "string" then
-			return '"' .. value .. '"'
-		elseif type == "number" then
-			return value
-		elseif type == "boolean" then
-			return tostring(value)
-		elseif type == "nil" then
-			return '"' .. tostring(value) .. '"'
-		end
-		return "\"\\\"" .. tostring(value) .. "\\\"\""
+local function explicit(value)
+	local type = type(value)
+	if type == "string" then
+		return '"' .. value .. '"'
+	elseif type == "number" then
+		return value
+	elseif type == "boolean" then
+		return tostring(value)
+	elseif type == "nil" then
+		return '"' .. tostring(value) .. '"'
 	end
+	return "\"\\\"" .. tostring(value) .. "\\\"\""
+end
 
+local function stringify(root)
 	if type(root) ~= "table" then
 		return explicit(root)
 	end
@@ -60,3 +60,5 @@ return function(root)
 	traverse(root, "")
 	return table.concat(image)
 end
+
+return stringify
