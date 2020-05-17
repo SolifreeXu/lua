@@ -10,7 +10,7 @@ return function(root)
 		elseif type == "nil" then
 			return '"' .. tostring(value) .. '"'
 		end
-		return "\"\\\"" .. tostring(value) .. "\"\\\""
+		return "\"\\\"" .. tostring(value) .. "\\\"\""
 	end
 
 	if type(root) ~= "table" then
