@@ -13,12 +13,12 @@
 ## 设计模式
 
 ## 工具库
-串化工具：[stringify](tool/stringify/README.md)
+串化工具：[stringify](tool/stringify/README.md)  
 复制工具：clone
 
 ## 作者
-name：许聪
-mailbox：2592419242@qq.com
+name：许聪  
+mailbox：2592419242@qq.com  
 CSDN：https://blog.csdn.net/xucongyoushan  
 gitee：https://gitee.com/solifree  
 github：https://github.com/xucongandxuchong
