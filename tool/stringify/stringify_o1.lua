@@ -4,12 +4,11 @@ local function explicit(value)
 		return '"' .. value .. '"'
 	elseif type == "number" then
 		return value
-	elseif type == "boolean" then
+	elseif type == "boolean"
+		or type == "nil" then
 		return tostring(value)
-	elseif type == "nil" then
-		return '"' .. tostring(value) .. '"'
 	end
-	return "\"\\\"" .. tostring(value) .. "\\\"\""
+	return '"' .. tostring(value) .. '"'
 end
 
 local function stringify(root)
