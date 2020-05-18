@@ -4,9 +4,10 @@ local function explicit(value)
 		return '"' .. value .. '"'
 	elseif type == "number" then
 		return value
-	elseif type == "boolean"
-		or type == "nil" then
+	elseif type == "boolean" then
 		return tostring(value)
+	elseif type == "nil" then
+		return type
 	end
 	return '"' .. tostring(value) .. '"'
 end
