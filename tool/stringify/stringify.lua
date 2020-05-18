@@ -12,7 +12,7 @@ local function explicit(value)
 	return '"' .. tostring(value) .. '"'
 end
 
-local function stringify(root)
+return function(root)
 	if type(root) ~= "table" then
 		return explicit(root)
 	end
@@ -60,5 +60,3 @@ local function stringify(root)
 	traverse(root, "")
 	return table.concat(image)
 end
-
-return stringify
