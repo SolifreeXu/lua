@@ -1,5 +1,5 @@
 ## 简介
-存放lua之行的精选代码，代码按照语言特性、数据结构、算法、设计模式、工具类库分类。
+Lua之行的精选代码，按照语言特性、数据结构、算法、设计模式、工具类库分类存放。
 
 ## 语言特性
 [表](feature/表.lua)  
@@ -14,7 +14,7 @@
 
 ## 工具库
 串化工具：[stringify](tool/stringify/README.md)  
-复制工具：clone
+复制工具：[clone](tool/clone.lua)
 
 ## 作者
 name：许聪  
