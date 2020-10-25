@@ -13,8 +13,10 @@ Lua之行的精选代码，按照语言特性、数据结构、算法、设计�
 ## 设计模式
 
 ## 工具库
-串化工具：[stringify](tool/stringify/README.md)  
-复制工具：[clone](tool/clone.lua)
+Lua字符串化：[stringify](tool/stringify/README.md)  
+Lua复制数据：[copy](tool/copy.lua)  
+文本文件局部复制：[copy](tool/copy/README.md)  
+文本文件局部替换：[replace](tool/replace/README.md)
 
 ## 作者
 name：许聪  

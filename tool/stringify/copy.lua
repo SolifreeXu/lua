@@ -1,4 +1,4 @@
-return function clone(table)
+return function(table)
 	local function copy(old)
 		if type(old) ~= "table" then
 			return old

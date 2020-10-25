@@ -1,8 +1,8 @@
 ## 简介
-应项目需求，设计并实现一款lua串化工具——[stringify.lua](stringify.lua)。
+应项目需求，设计并实现一款lua字符串化工具——[stringify.lua](stringify.lua)。
 
 ## 功能
-串化工具统一转换lua数据类型为字符串，字符串支持再次解释为原始类型，仅限于nil、boolean、number、string、table共5种类型。
+字符串化工具统一转换lua数据类型为字符串，字符串支持再次解释为原始类型，仅限于nil、boolean、number、string、table共5种类型。
 
 ## 设计
 Lua存在8种数据类型，分别是nil、boolean、number、string、function、userdata、thread和table。
@@ -14,8 +14,8 @@ Lua存在8种数据类型，分别是nil、boolean、number、string、function�
 表引用关系采用特殊格式组织，需要额外处理才可以还原表结构。  
 针对表与子表循环引用的情况，采用映射表记录已遍历的表路径，以防止无限遍历。  
   
-当连接大量字符串时，由于lua的字符串不可变，存在多次复制大量字符串的问题，影响串化性能。  
-于是先把串化结果依次尾插至表中，再调用table.concat函数一次性连接字符串，以提高字符串连接效率。  
+当连接大量字符串时，由于lua的字符串不可变，存在多次复制大量字符串的问题，影响字符串化性能。  
+于是先把字符串化结果依次尾插至表中，再调用table.concat函数一次性连接字符串，以提高字符串连接效率。  
 另外，在3种表尾插方法之中，效率由低至高排列为table.insert、table size、counter。
 
 ## 优化
@@ -24,9 +24,9 @@ Lua存在8种数据类型，分别是nil、boolean、number、string、function�
 为避免函数调用的开销，可以内嵌函数代码至调用处，不过这会降低代码的可读性、可维护性和可变更性。
 
 ## 测试
-复制工具：[clone.lua](clone.lua)  
+复制工具：[copy.lua](copy.lua)  
 测试代码：[test.lua](test.lua)  
-借助复制工具，复制100000个数据表，插入原表之中，再调用串化工具串化原表，记录并输出串化耗时。
+借助复制工具，复制100000个数据表，插入原表之中，再字符串化原表，记录并输出耗时。
 
 ## 作者
 name：许聪  

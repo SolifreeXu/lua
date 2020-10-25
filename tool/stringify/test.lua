@@ -1,22 +1,47 @@
+local function single(names)
+	return require(names)
+end
+
+local function batch(names)
+	local sources = {}
+	for index = 1, #names do
+		sources = require(names[index])
+	end
+	return sources
+end
+
+local IMPORT_MAPPING = {
+	["string"] = single,
+	["table"] = batch,
+}
+
 path = {}
-function path.import(functor, path)
-	if not functor then
+function path.import(names, path)
+	if not names then
 		return
 	end
-
+	
+	local type = type(names)
+	if type == "table" and not next(names) then
+		return
+	end
+	
+	local import = assert(IMPORT_MAPPING[type], type)
 	-- 备份并改变默认搜索路径
-	local temp = path
-	if temp then
-		path = package.path
-		package.path = temp .. "?.lua"
+	if path then
+		path, package.path = package.path, path .. "?.lua"
 	end
 
-	functor()
+	local state, sources = xpcall(import, debug.traceback, names)
+	if not state then
+		print(sources)
+	end
 
 	-- 恢复默认搜索路径
 	if path then
 		package.path = path
 	end
+	return sources
 end
 
 function path.current()
@@ -37,20 +62,16 @@ function path.current()
 	return string.match(path, "^.*[/\\]")
 end
 
-local stringify
-local clone
-path.import(function()
-	stringify = require "stringify"
-	clone = require "clone"
-end, path.current())
+local sources = path.import({"stringify", "copy"}, path.current())
+local stringify, copy = table.unpack(sources)
 
 local player = {
 	base = {
 		id = "RO-0000000001",
-		sex = 2,
+		sex = 1,
 		name = "solifree",
 		nature = "freedom",
-		dress = 201,
+		dress = 101,
 	},
 	organization = "eterfree",
 	founder = true,
@@ -59,10 +80,10 @@ local player = {
 }
 
 local insert = table.insert
-local prototype = clone(player)
+local prototype = copy(player)
 ---[[
 for i = 1, 100000 do
-	insert(player.observer, clone(prototype))
+	insert(player.observer, copy(prototype))
 end
 --]]
 --[[
