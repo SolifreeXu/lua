@@ -1,16 +1,16 @@
-local function single(names)
-	return require(names)
+local function single(name)
+	return require(name)
 end
 
 local function batch(names)
 	local sources = {}
 	for index = 1, #names do
-		sources = require(names[index])
+		sources[index] = require(names[index])
 	end
 	return sources
 end
 
-local IMPORT_MAPPING = {
+local IMPORT_MAPPINGS = {
 	["string"] = single,
 	["table"] = batch,
 }
@@ -26,7 +26,7 @@ function path.import(names, path)
 		return
 	end
 	
-	local import = assert(IMPORT_MAPPING[type], type)
+	local import = assert(IMPORT_MAPPINGS[type], type)
 	if path then
 		path, package.path = package.path, path .. "?.lua"
 	end
