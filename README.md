@@ -20,7 +20,7 @@ Lua复制数据：[copy](tool/copy.lua)
 
 ## 作者
 name：许聪  
-mailbox：2592419242@qq.com  
+mailbox：solifree@qq.com  
 CSDN：https://blog.csdn.net/xucongyoushan  
 gitee：https://gitee.com/solifree  
-github：https://github.com/xucongandxuchong
+github：https://github.com/SolifreeXu
